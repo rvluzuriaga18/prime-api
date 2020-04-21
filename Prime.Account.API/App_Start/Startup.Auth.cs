@@ -1,12 +1,12 @@
 ﻿using System;
 using Owin;
-using System.Configuration;
+using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Jwt;
 using Microsoft.Owin.Security.DataHandler.Encoder;
 using Microsoft.Owin.Security.OAuth;
-using Microsoft.Owin;
 using Prime.Account.API.OAuth;
+using Prime.Account.API.Helpers;
 
 namespace Prime.Account.API
 {
@@ -14,11 +14,11 @@ namespace Prime.Account.API
     {
         public void ConfigureOAuth(IAppBuilder app)
         {
-            var issuer = ConfigurationManager.AppSettings["Issuer"];
-            var secret = TextEncodings.Base64Url.Decode(ConfigurationManager.AppSettings["Secret"]);
-            var audience = ConfigurationManager.AppSettings["Audience"];
-            var endpointPath = ConfigurationManager.AppSettings["EndpointPath"];
-            var tokenExpireTimeSpan = int.Parse(ConfigurationManager.AppSettings["TokenExpireTimeSpan"]);
+            var issuer = ConfigHelper.GetIssuer;
+            var secret = TextEncodings.Base64Url.Decode(ConfigHelper.GetSecretKey);
+            var audience = ConfigHelper.GetAudience;
+            var endpointPath = ConfigHelper.GetEndpointPath;
+            var tokenExpireTimeSpan = int.Parse(ConfigHelper.GetTokenExpireTimeSpan);
 
             app.UseJwtBearerAuthentication(new JwtBearerAuthenticationOptions
             {

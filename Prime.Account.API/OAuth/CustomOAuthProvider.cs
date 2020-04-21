@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Configuration;
 using System.Threading.Tasks;
-using Microsoft.Owin.Security.OAuth;
 using System.Diagnostics;
 using System.Security.Claims;
 using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.OAuth;
+using Prime.Account.API.Helpers;
 
 namespace Prime.Account.API.OAuth
 {
@@ -33,11 +33,11 @@ namespace Prime.Account.API.OAuth
         {
             try
             {
-                var allowedOrigin = ConfigurationManager.AppSettings["AllowedOrigin"];
-                var authenticationType = ConfigurationManager.AppSettings["AuthenticationType"];
-                var oauthError = ConfigurationManager.AppSettings["OAuthError"];
-                var oAuthErrorDesc = ConfigurationManager.AppSettings["OAuthErrorDescription"];
-                var oAuthErrorStatusCode = ConfigurationManager.AppSettings["OAuthResponseStatusCode"];
+                var allowedOrigin = ConfigHelper.GetAllowedOrigin;
+                var authenticationType = ConfigHelper.GetAuthType;
+                var oauthError = ConfigHelper.GetOAuthError;
+                var oAuthErrorDesc = ConfigHelper.GetOAuthErrorDesc;
+                var oAuthErrorStatusCode = ConfigHelper.GetOAuthErrorStatCode;
 
                 context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 

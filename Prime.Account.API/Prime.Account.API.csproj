@@ -197,6 +197,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ConfigHelper.cs" />
     <Compile Include="OAuth\CustomOAuthProvider.cs" />
     <Compile Include="OAuth\CustomJwtFormat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

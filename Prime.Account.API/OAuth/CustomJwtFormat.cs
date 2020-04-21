@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Configuration;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler.Encoder;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using Prime.Account.API.Helpers;
 
 namespace Prime.Account.API.OAuth
 {
     public class CustomJwtFormat : ISecureDataFormat<AuthenticationTicket>
     {
-        private static readonly byte[] _secret = TextEncodings.Base64Url.Decode(ConfigurationManager.AppSettings["Secret"]);
-        private static readonly string _audience = ConfigurationManager.AppSettings["Audience"];
+        private static readonly byte[] _secret = TextEncodings.Base64Url.Decode(ConfigHelper.GetSecretKey);
+        private static readonly string _audience = ConfigHelper.GetAudience;
         private readonly string _issuer;
 
         public CustomJwtFormat(string issuer)
