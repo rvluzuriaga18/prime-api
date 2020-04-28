@@ -18,7 +18,7 @@ namespace Prime.Account.API.OAuth
             {
                 context.TryGetFormCredentials(out _clientId, out _clientSecret);
 
-                if(_clientId == "clientId101" && _clientSecret == "clientSecret101")
+                if(_clientId == ConfigHelper.GetClientID && _clientSecret == ConfigHelper.GetClientSecret)
                        context.Validated(_clientId);
             }
             catch (Exception e)
@@ -71,7 +71,7 @@ namespace Prime.Account.API.OAuth
 
         public static bool IsAuthorizedUser(string username, string password)
         {
-            return username == "sa" && password == "Ch3ck1t{}";
+            return username == ConfigHelper.GetUsername && password == ConfigHelper.GetPassword;
         }
     }
 }

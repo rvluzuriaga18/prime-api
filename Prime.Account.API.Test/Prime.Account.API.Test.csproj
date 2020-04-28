@@ -57,10 +57,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountAPITests.cs" />
+    <Compile Include="AesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AesCrypto\AesCrypto.csproj">
+      <Project>{93c2d534-7de9-4756-b92a-e5839217cc8c}</Project>
+      <Name>AesCrypto</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

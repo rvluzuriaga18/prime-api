@@ -30,20 +30,22 @@ namespace Prime.Account.API.Test
                 HttpResponseMessage tokenResponse;
                 using(var client = new HttpClient())
                 {
-                    tokenResponse = client.PostAsync("https://localhost:44377/oauth2/token", content).Result;
+                    //tokenResponse = client.PostAsync("https://localhost:44377/oauth2/token", content).Result;
+                    tokenResponse = client.PostAsync("https://localhost/primeapi/oauth2/token", content).Result;
                 }
 
                 var tokenResult = tokenResponse.Content.ReadAsStringAsync().Result;
-                var dictResult = JsonConvert.DeserializeObject<Dictionary<string,string>>(tokenResult);
+                var dictResult = JsonConvert.DeserializeObject<Dictionary<string, string>>(tokenResult);
                 var accessToken = dictResult.Where(x => x.Key == "access_token")
-                                     .Select(v => v.Value)
-                                     .FirstOrDefault();
+                                            .Select(v => v.Value)
+                                            .FirstOrDefault();
 
                 HttpResponseMessage accntResponse;
                 using (var client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                    accntResponse = client.GetAsync("https://localhost:44377/api/Account/GetPersonalInfo").Result;
+                    //accntResponse = client.GetAsync("https://localhost:44377/api/Account/GetPersonalInfo").Result;
+                    accntResponse = client.GetAsync("https://localhost/primeapi/api/Account/GetPersonalInfo").Result;
                 }
 
                 var result = string.Empty;
@@ -51,6 +53,7 @@ namespace Prime.Account.API.Test
                     result = accntResponse.Content.ReadAsStringAsync().Result;
                 else
                     result = accntResponse.Content.ReadAsStringAsync().Result;
+                
             }
             catch (Exception e)
             {
