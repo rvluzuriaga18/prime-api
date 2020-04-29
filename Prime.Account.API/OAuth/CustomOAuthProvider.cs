@@ -5,6 +5,7 @@ using System.Security.Claims;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using Prime.Account.API.Helpers;
+using AesCrypto;
 
 namespace Prime.Account.API.OAuth
 {
@@ -18,7 +19,10 @@ namespace Prime.Account.API.OAuth
             {
                 context.TryGetFormCredentials(out _clientId, out _clientSecret);
 
-                if(_clientId == ConfigHelper.GetClientID && _clientSecret == ConfigHelper.GetClientSecret)
+                var clientId = EncryptorDecryptor.Decrypt(ConfigHelper.GetClientID);
+                var clientSecret = EncryptorDecryptor.Decrypt(ConfigHelper.GetClientSecret);
+
+                if(_clientId == clientId && _clientSecret == clientSecret)
                        context.Validated(_clientId);
             }
             catch (Exception e)
@@ -71,7 +75,10 @@ namespace Prime.Account.API.OAuth
 
         public static bool IsAuthorizedUser(string username, string password)
         {
-            return username == ConfigHelper.GetUsername && password == ConfigHelper.GetPassword;
+            var user = EncryptorDecryptor.Decrypt(ConfigHelper.GetUsername);
+            var pass = EncryptorDecryptor.Decrypt(ConfigHelper.GetPassword);
+
+            return username == user && password == pass;
         }
     }
 }
