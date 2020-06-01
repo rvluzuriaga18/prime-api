@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AesModel.cs" />
+    <Compile Include="Models\AesModel.cs" />
     <Compile Include="EncryptorDecryptor.cs" />
     <Compile Include="Helpers\EncryptorDecryptorHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

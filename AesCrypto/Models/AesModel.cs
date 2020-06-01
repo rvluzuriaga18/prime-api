@@ -1,4 +1,4 @@
-﻿namespace AesCrypto
+﻿namespace AesCrypto.Models
 {
     public class AesModel
     {

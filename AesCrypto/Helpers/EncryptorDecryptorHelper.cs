@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Security.Cryptography;
+using AesCrypto.Models;
 
 namespace AesCrypto.Helpers
 {

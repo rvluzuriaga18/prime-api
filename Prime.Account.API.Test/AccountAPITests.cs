@@ -30,8 +30,8 @@ namespace Prime.Account.API.Test
                 HttpResponseMessage tokenResponse;
                 using(var client = new HttpClient())
                 {
-                    //tokenResponse = client.PostAsync("https://localhost:44377/oauth2/token", content).Result;
-                    tokenResponse = client.PostAsync("https://localhost/primeapi/oauth2/token", content).Result;
+                    tokenResponse = client.PostAsync("https://localhost:44377/oauth2/token", content).Result;
+                    //tokenResponse = client.PostAsync("https://localhost/primeapi/oauth2/token", content).Result;
                 }
 
                 var tokenResult = tokenResponse.Content.ReadAsStringAsync().Result;
@@ -44,16 +44,20 @@ namespace Prime.Account.API.Test
                 using (var client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                    //accntResponse = client.GetAsync("https://localhost:44377/api/Account/GetPersonalInfo").Result;
-                    accntResponse = client.GetAsync("https://localhost/primeapi/api/Account/GetPersonalInfo").Result;
+                    accntResponse = client.GetAsync("https://localhost:44377/api/Account/GetEmployeeDetails").Result;
+                    //accntResponse = client.GetAsync("https://localhost/primeapi/api/Account/GetEmployeeDetails").Result;
                 }
 
                 var result = string.Empty;
                 if (!accntResponse.IsSuccessStatusCode)
+                {
                     result = accntResponse.Content.ReadAsStringAsync().Result;
+                }
                 else
+                {
                     result = accntResponse.Content.ReadAsStringAsync().Result;
-                
+                }
+
             }
             catch (Exception e)
             {
