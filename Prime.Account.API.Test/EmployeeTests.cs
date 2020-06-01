@@ -10,10 +10,10 @@ using Newtonsoft.Json;
 namespace Prime.Account.API.Test
 {
     [TestClass]
-    public class AccountAPITests
+    public class EmployeeTests
     {
         [TestMethod]
-        public void AccountAPITest()
+        public void GetEmployeeDetailsTests()
         {
             try
             {
@@ -44,8 +44,8 @@ namespace Prime.Account.API.Test
                 using (var client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                    accntResponse = client.GetAsync("https://localhost:44377/api/Account/GetEmployeeDetails").Result;
-                    //accntResponse = client.GetAsync("https://localhost/primeapi/api/Account/GetEmployeeDetails").Result;
+                    accntResponse = client.GetAsync("https://localhost:44377/api/Employee/GetEmployeeDetails").Result;
+                    //accntResponse = client.GetAsync("https://localhost/primeapi/api/Employee/GetEmployeeDetails").Result;
                 }
 
                 var result = string.Empty;

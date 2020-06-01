@@ -10,11 +10,11 @@ using Prime.Account.API.Models;
 namespace Prime.Account.API.Controllers
 {
     [Authorize]
-    public class AccountController : ApiController
+    public class EmployeeController : ApiController
     {
         private static readonly ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        [Route("api/Account/GetEmployeeDetails")]
+        [Route("api/Employee/GetEmployeeDetails")]
         public HttpResponseMessage GetEmployeeDetails()
         {
             try
@@ -29,7 +29,7 @@ namespace Prime.Account.API.Controllers
             }
         }
 
-        [Route("api/Account/GetEmployeeDetails/{employeeID}")]
+        [Route("api/Employee/GetEmployeeDetails/{employeeID}")]
         public HttpResponseMessage GetEmployeeDetailsByID(int employeeID)
         {
             try
