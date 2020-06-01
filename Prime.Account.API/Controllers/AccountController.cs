@@ -24,7 +24,7 @@ namespace Prime.Account.API.Controllers
             }
             catch (Exception e)
             {
-                _logger.Error(e);
+                _logger.Error(e.ToString());
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }
@@ -39,7 +39,7 @@ namespace Prime.Account.API.Controllers
             }
             catch (Exception e)
             {
-                _logger.Error(e);
+                _logger.Error(e.ToString());
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }

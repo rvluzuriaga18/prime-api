@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Threading.Tasks;
-using System.Diagnostics;
 using System.Security.Claims;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using Prime.Account.API.Helpers;
 using AesCrypto;
+using log4net;
 
 namespace Prime.Account.API.OAuth
 {
     public class CustomOAuthProvider : OAuthAuthorizationServerProvider
     {
+        private static readonly ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private string _clientId;
         private string _clientSecret;
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
@@ -27,7 +29,7 @@ namespace Prime.Account.API.OAuth
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e);
+                _logger.Error(e.ToString());
             }
 
             return base.ValidateClientAuthentication(context);
@@ -65,7 +67,7 @@ namespace Prime.Account.API.OAuth
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e);
+                _logger.Error(e.ToString());
             }
 
             return Task.FromResult<object>(null);
