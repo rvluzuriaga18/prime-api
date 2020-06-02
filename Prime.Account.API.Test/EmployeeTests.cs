@@ -32,13 +32,13 @@ namespace Prime.Account.API.Test
                 using(var client = new HttpClient())
                 {
                     // Call hosted web API
-                    //tokenResponse = client.PostAsync("https://www.rvluzuriaga.somee.com/oauth2/token", content).Result;
+                       tokenResponse = client.PostAsync("https://www.rvluzuriaga.somee.com/oauth2/token", content).Result;
 
                     // Call deployed web API in local environment
                     // tokenResponse = client.PostAsync("https://localhost/primeapi/oauth2/token", content).Result;
 
                     // Debug mode
-                   tokenResponse = client.PostAsync("https://localhost:44377/oauth2/token", content).Result;
+                    // tokenResponse = client.PostAsync("https://localhost:44377/oauth2/token", content).Result;
                 }
 
                 var tokenResult = tokenResponse.Content.ReadAsStringAsync().Result;
@@ -59,13 +59,13 @@ namespace Prime.Account.API.Test
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
                     // Call the hosted web API
-                    // accntResponse = client.GetAsync("https://www.rvluzuriaga.somee.com/api/Employee/GetEmployeeDetails").Result;
+                       employeeResponse = client.GetAsync("https://www.rvluzuriaga.somee.com/api/Employee/GetEmployeeDetails").Result;
 
                     // Call the deployed web API in local environment
-                    // accntResponse = client.GetAsync("https://localhost/primeapi/api/Employee/GetEmployeeDetails").Result;
+                    // employeeResponse = client.GetAsync("https://localhost/primeapi/api/Employee/GetEmployeeDetails").Result;
 
                     // Debug mode
-                    employeeResponse = client.GetAsync("https://localhost:44377/api/Employee/GetEmployeeDetails").Result;
+                    // employeeResponse = client.GetAsync("https://localhost:44377/api/Employee/GetEmployeeDetails").Result;
                 }
 
                 var employeeResult = employeeResponse.Content.ReadAsStringAsync().Result;
