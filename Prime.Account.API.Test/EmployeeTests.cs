@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;
+using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
+using Prime.Account.API.Test.Models;
 
 namespace Prime.Account.API.Test
 {
@@ -30,47 +31,52 @@ namespace Prime.Account.API.Test
                 HttpResponseMessage tokenResponse;
                 using(var client = new HttpClient())
                 {
-                    // Call the hosted web API
-                    tokenResponse = client.PostAsync("https://www.rvluzuriaga.somee.com/oauth2/token", content).Result;
+                    // Call hosted web API
+                    //tokenResponse = client.PostAsync("https://www.rvluzuriaga.somee.com/oauth2/token", content).Result;
 
-                    // Call the deployed web API in local environment
+                    // Call deployed web API in local environment
                     // tokenResponse = client.PostAsync("https://localhost/primeapi/oauth2/token", content).Result;
 
                     // Debug mode
-                    // tokenResponse = client.PostAsync("https://localhost:44377/oauth2/token", content).Result;
+                   tokenResponse = client.PostAsync("https://localhost:44377/oauth2/token", content).Result;
                 }
 
                 var tokenResult = tokenResponse.Content.ReadAsStringAsync().Result;
+
+                // Assertion
+                Assert.IsTrue(tokenResponse.IsSuccessStatusCode, tokenResult);
+                Assert.IsNotNull(tokenResult, "Token is null.");
+
+                // Get Token
                 var dictResult = JsonConvert.DeserializeObject<Dictionary<string, string>>(tokenResult);
                 var accessToken = dictResult.Where(x => x.Key == "access_token")
                                             .Select(v => v.Value)
                                             .FirstOrDefault();
 
-                HttpResponseMessage accntResponse;
+                HttpResponseMessage employeeResponse;
                 using (var client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
                     // Call the hosted web API
-                    accntResponse = client.GetAsync("https://www.rvluzuriaga.somee.com/api/Employee/GetEmployeeDetails").Result;
+                    // accntResponse = client.GetAsync("https://www.rvluzuriaga.somee.com/api/Employee/GetEmployeeDetails").Result;
 
                     // Call the deployed web API in local environment
                     // accntResponse = client.GetAsync("https://localhost/primeapi/api/Employee/GetEmployeeDetails").Result;
 
                     // Debug mode
-                    // accntResponse = client.GetAsync("https://localhost:44377/api/Employee/GetEmployeeDetails").Result;
+                    employeeResponse = client.GetAsync("https://localhost:44377/api/Employee/GetEmployeeDetails").Result;
                 }
 
-                var result = string.Empty;
-                if (!accntResponse.IsSuccessStatusCode)
-                {
-                    result = accntResponse.Content.ReadAsStringAsync().Result;
-                }
-                else
-                {
-                    result = accntResponse.Content.ReadAsStringAsync().Result;
-                }
+                var employeeResult = employeeResponse.Content.ReadAsStringAsync().Result;
 
+                Assert.IsTrue(tokenResponse.IsSuccessStatusCode, employeeResult);
+
+                var employees = JsonConvert.DeserializeObject<List<Employee>>(employeeResult);
+
+                Assert.IsNotNull(employees, "Employees object is null.");
+
+                Assert.AreNotEqual(0, employees.Count);
             }
             catch (Exception e)
             {
