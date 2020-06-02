@@ -70,7 +70,7 @@ namespace Prime.Account.API.Test
 
                 var employeeResult = employeeResponse.Content.ReadAsStringAsync().Result;
 
-                Assert.IsTrue(tokenResponse.IsSuccessStatusCode, employeeResult);
+                Assert.IsTrue(employeeResponse.IsSuccessStatusCode, employeeResult);
 
                 var employees = JsonConvert.DeserializeObject<List<Employee>>(employeeResult);
 
