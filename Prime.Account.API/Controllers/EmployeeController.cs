@@ -14,6 +14,9 @@ namespace Prime.Account.API.Controllers
     {
         private static readonly ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        /// <summary>
+        /// Retrieve all registered employees.
+        /// </summary>
         [Route("api/Employee/GetEmployeeDetails")]
         public HttpResponseMessage GetEmployeeDetails()
         {
@@ -29,6 +32,9 @@ namespace Prime.Account.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieve employee by Employee ID.
+        /// </summary>
         [Route("api/Employee/GetEmployeeDetails/{employeeID}")]
         public HttpResponseMessage GetEmployeeDetailsByID(int employeeID)
         {
