@@ -1,25 +1,17 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace Prime.Account.API.Helpers
 {
     public static class DataFormatterHelper
     {
-        public static string ConvertPascalToCamelCase<T>(T model)
+        public static T RemoveReferenceLooping<T>(T model)
         {
-            var contractResolver = new DefaultContractResolver
+            var rawJson = JsonConvert.SerializeObject(model, new JsonSerializerSettings
             {
-                NamingStrategy = new CamelCaseNamingStrategy
-                {
-                    OverrideSpecifiedNames = false
-                }
-            };
-
-            return JsonConvert.SerializeObject(model, new JsonSerializerSettings
-            {
-                ContractResolver = contractResolver,
-                Formatting = Formatting.Indented
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             });
+
+            return JsonConvert.DeserializeObject<T>(rawJson);
         }
     }
 }

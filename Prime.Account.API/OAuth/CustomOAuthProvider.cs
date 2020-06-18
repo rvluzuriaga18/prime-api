@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
+using log4net;
 using Prime.Account.API.Helpers;
 using AesCrypto;
-using log4net;
 
 namespace Prime.Account.API.OAuth
 {
@@ -47,7 +47,7 @@ namespace Prime.Account.API.OAuth
 
                 context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
-                if (!IsAuthorizedUser(context.UserName, context.Password))
+                if (!UserAuthHelper.AuthenticateUser(context.UserName, context.Password))
                 {
                     context.SetError(oauthError, oAuthErrorDesc);
                     context.Response.StatusCode = int.Parse(oAuthErrorStatusCode);
@@ -73,14 +73,6 @@ namespace Prime.Account.API.OAuth
             return Task.FromResult<object>(null);
 
             //return base.GrantResourceOwnerCredentials(context);
-        }
-
-        public static bool IsAuthorizedUser(string username, string password)
-        {
-            var user = EncryptorDecryptor.Decrypt(ConfigHelper.GetUsername);
-            var pass = EncryptorDecryptor.Decrypt(ConfigHelper.GetPassword);
-
-            return username == user && password == pass;
         }
     }
 }

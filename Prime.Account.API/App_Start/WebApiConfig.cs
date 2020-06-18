@@ -7,7 +7,6 @@ namespace Prime.Account.API
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-            //config.Filters.Add(new BasicAuth());
 
             // Web API routes
             config.MapHttpAttributeRoutes();

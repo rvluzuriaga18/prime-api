@@ -481,14 +481,9 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
-        <member name="M:Prime.Account.API.Controllers.EmployeeController.GetEmployeeDetails">
+        <member name="M:Prime.Account.API.Controllers.UserController.GetUserIdentity">
             <summary>
-            Retrieve all registered employees.
-            </summary>
-        </member>
-        <member name="M:Prime.Account.API.Controllers.EmployeeController.GetEmployeeDetailsByID(System.Int32)">
-            <summary>
-            Retrieve employee by Employee ID.
+            Retrieve user identity.
             </summary>
         </member>
     </members>

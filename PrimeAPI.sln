@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prime.Account.API.Test", "P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AesCrypto", "AesCrypto\AesCrypto.csproj", "{93C2D534-7DE9-4756-B92A-E5839217CC8C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prime.Account.Data", "Prime.Account.Data\Prime.Account.Data.csproj", "{603B84CD-C80C-4788-877A-12EC82BEC117}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{93C2D534-7DE9-4756-B92A-E5839217CC8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93C2D534-7DE9-4756-B92A-E5839217CC8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93C2D534-7DE9-4756-B92A-E5839217CC8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{603B84CD-C80C-4788-877A-12EC82BEC117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{603B84CD-C80C-4788-877A-12EC82BEC117}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{603B84CD-C80C-4788-877A-12EC82BEC117}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{603B84CD-C80C-4788-877A-12EC82BEC117}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

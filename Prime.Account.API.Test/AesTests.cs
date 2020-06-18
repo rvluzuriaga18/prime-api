@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AesCrypto;
 
@@ -16,7 +15,7 @@ namespace Prime.Account.API.Test
         {
             try
             {
-                var plainText = "clientID101";
+                var plainText = "system";
 
                 var cipherText = EncryptorDecryptor.Encrypt(plainText);
 
@@ -24,7 +23,7 @@ namespace Prime.Account.API.Test
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e);
+                Assert.Fail(e.Message);
             }
         }
 

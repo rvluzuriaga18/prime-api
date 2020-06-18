@@ -8,8 +8,6 @@ namespace Prime.Account.API.Helpers
         public static string GetSecretKey => ConfigurationManager.AppSettings["Secret"];
         public static string GetClientID => ConfigurationManager.AppSettings["ClientID"];
         public static string GetClientSecret => ConfigurationManager.AppSettings["ClientSecret"];
-        public static string GetUsername => ConfigurationManager.AppSettings["Username"];
-        public static string GetPassword => ConfigurationManager.AppSettings["Password"];
         public static string GetAudience => ConfigurationManager.AppSettings["Audience"];
         public static string GetEndpointPath => ConfigurationManager.AppSettings["EndpointPath"];
         public static string GetTokenExpireTimeSpan => ConfigurationManager.AppSettings["TokenExpireTimeSpan"];
