@@ -21,6 +21,9 @@ namespace Prime.Account.API.OAuth
             {
                 context.TryGetFormCredentials(out _clientId, out _clientSecret);
 
+                if(string.IsNullOrEmpty(_clientId) && string.IsNullOrEmpty(_clientSecret))
+                    context.TryGetBasicCredentials(out _clientId, out _clientSecret);
+
                 var clientId = EncryptorDecryptor.Decrypt(ConfigHelper.GetClientID);
                 var clientSecret = EncryptorDecryptor.Decrypt(ConfigHelper.GetClientSecret);
 
@@ -45,7 +48,7 @@ namespace Prime.Account.API.OAuth
                 var oAuthErrorDesc = ConfigHelper.GetOAuthErrorDesc;
                 var oAuthErrorStatusCode = ConfigHelper.GetOAuthErrorStatCode;
 
-                context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
+                //context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
                 if (!UserAuthHelper.AuthenticateUser(context.UserName, context.Password))
                 {

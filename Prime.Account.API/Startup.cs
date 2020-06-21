@@ -1,5 +1,6 @@
 ﻿using Owin;
 using Microsoft.Owin;
+using Microsoft.Owin.Cors;
 
 [assembly: OwinStartup(typeof(Prime.Account.API.Startup))]
 
@@ -13,6 +14,8 @@ namespace Prime.Account.API
         {
             log4net.Config.XmlConfigurator.Configure();
             Logger.Info("PrimeAPI Logger has been configured.");
+
+            app.UseCors(CorsOptions.AllowAll);
 
             ConfigureOAuth(app);
         }
