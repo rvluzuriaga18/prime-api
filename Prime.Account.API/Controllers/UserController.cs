@@ -2,10 +2,12 @@
 using log4net;
 using System.Net;
 using System.Web.Http;
-using System.Net.Http;
 using Prime.Account.Data.UnitOfWork;
 using Prime.Account.Data.Core;
 using Prime.Account.API.Helpers;
+using Prime.Account.API.Models;
+using AesCrypto;
+using System.Linq;
 
 namespace Prime.Account.API.Controllers
 {
@@ -18,7 +20,7 @@ namespace Prime.Account.API.Controllers
         /// Retrieve user identity.
         /// </summary>
         [Route("api/User/GetUserIdentity")]
-        public HttpResponseMessage GetUserIdentity()
+        public IHttpActionResult GetUserIdentity()
         {
             try
             {
@@ -30,13 +32,60 @@ namespace Prime.Account.API.Controllers
                     var result = DataFormatterHelper.RemoveReferenceLooping(data);
                     result.Password = null;
 
-                    return Request.CreateResponse(HttpStatusCode.OK, result);
+                    return Ok(result);
                 }
             }
             catch (Exception e)
             {
                 _logger.Error(e.ToString());
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Content(HttpStatusCode.InternalServerError, e);
+            }
+        }
+
+        /// <summary>
+        /// Register user in Prime.
+        /// </summary>
+        [HttpPost]
+        [Route("api/User/Register")]
+        public IHttpActionResult Register(BusinessEntity request)
+        {
+            try
+            {
+                using (var unitOfWork = new UnitOfWork(new PrimeDbContext()))
+                {
+                    var businessEntityUser = unitOfWork.BusinessEntity
+                                                     .Find(user => user.Username.Equals(request.Username,
+                                                      StringComparison.InvariantCultureIgnoreCase))
+                                                     .FirstOrDefault()?.Username;
+
+                    if (!string.IsNullOrEmpty(businessEntityUser))
+                        return Ok(new OperationResult() 
+                        {
+                            IsSuccess = false,
+                            Message = "Username already exists."
+                        });
+
+                    var be = new BusinessEntity()
+                    {
+                        CreatedOn = DateTime.Now,
+                        Username = request.Username,
+                        Password = EncryptorDecryptor.Encrypt(request.Password)
+                    };
+
+                    be.Person = request.Person;
+                    be.PersonAddresses = request.PersonAddresses;
+
+                    unitOfWork.BusinessEntity.Add(be);
+                    unitOfWork.SaveChanges();
+
+                    return Ok(new OperationResult());
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.ToString());
+                return Content(HttpStatusCode.InternalServerError,
+                    new OperationResult() { IsSuccess = false, Message = e.ToString()});
             }
         }
     }

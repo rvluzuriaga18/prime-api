@@ -486,5 +486,10 @@
             Retrieve user identity.
             </summary>
         </member>
+        <member name="M:Prime.Account.API.Controllers.UserController.Register(Prime.Account.Data.Core.BusinessEntity)">
+            <summary>
+            Register user in Prime.
+            </summary>
+        </member>
     </members>
 </doc>
