@@ -486,9 +486,19 @@
             Retrieve user identity.
             </summary>
         </member>
+        <member name="M:Prime.Account.API.Controllers.UserController.GetUserList">
+            <summary>
+            Retrieve all users.
+            </summary>
+        </member>
         <member name="M:Prime.Account.API.Controllers.UserController.Register(Prime.Account.Data.Core.BusinessEntity)">
             <summary>
             Register user in Prime.
+            </summary>
+        </member>
+        <member name="M:Prime.Account.API.Controllers.UserController.Update(Prime.Account.Data.Core.BusinessEntity)">
+            <summary>
+            Update user in Prime.
             </summary>
         </member>
     </members>

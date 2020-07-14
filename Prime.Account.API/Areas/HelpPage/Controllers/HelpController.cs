@@ -1,6 +1,7 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
+using System.Configuration;
 using Prime.Account.API.Areas.HelpPage.ModelDescriptions;
 using Prime.Account.API.Areas.HelpPage.Models;
 
@@ -27,6 +28,7 @@ namespace Prime.Account.API.Areas.HelpPage.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.PrimeApkLink = ConfigurationManager.AppSettings["PrimeApkLink"];
             ViewBag.DocumentationProvider = Configuration.Services.GetDocumentationProvider();
             return View(Configuration.Services.GetApiExplorer().ApiDescriptions);
         }
